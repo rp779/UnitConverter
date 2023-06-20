@@ -12,8 +12,10 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var inputDegree: Double = 0
-    @State private var conversion: String = "Fahrenheit"
+    @State private var inputUnit: String = "Fahrenheit"
+    @State private var outputUnit: String = "Fahrenheit"
     @FocusState private var keyboardFocus: Bool
+    
     
     let units: [String] = ["Celsius", "Fahrenheit", "Kelvin"]
     
@@ -28,12 +30,25 @@ struct ContentView: View {
                     Text("Starting Degrees")
                 }
                 Section {
-                    Picker("Units", selection: $conversion) {
+                    Picker("Units", selection: $inputUnit) {
                         ForEach(units, id: \.self) { unit in
                             Text(unit)
                         }
                     }.pickerStyle(.segmented)
+                } header: {
+                    Text("Input Unit")
                 }
+            
+                Section {
+                    Picker("Units", selection: $outputUnit) {
+                        ForEach(units, id: \.self) { unit in
+                            Text(unit)
+                        }
+                    }.pickerStyle(.segmented)
+                } header: {
+                    Text("Output Unit")
+                }
+
             }
         }
         .toolbar {
